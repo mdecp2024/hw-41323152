@@ -144,11 +144,29 @@ img.add_border {
     <div id="tipue_search_content">w10 << <a href='w10.html'>Previous</a> <a href='w12.html'>Next</a> >> w12<br /><h1>w11_hw</h1>
 <p>第一題(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/f992fe4f474bf3767bf43d547988cee0/raw/f4aec130c4a67a480504033ef8c88f5b4b8f7f36/hw1.py">"*"畫出空心圓</a>)</p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/L8w2Apruz8Q" width="560"></iframe></p>
-<p><span> 上次是做金字塔，這次我嘗試做空心圓，雖然程式我不是自己全部自己寫，但我還是有了解一些一步步學習。下一次可以挑戰更高難度的圖形形狀。</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import math
+
+size = 10  # 設定字元區域的大小為 10x10
+radius = 3.5 # 設定半徑為 3.5
+center = 3.5  # 圓心位置設為 (3.5, 3.5)
+
+for y in range(size):
+    for x in range(size):
+        # 計算每個點到圓心的距離
+        distance = math.sqrt((x - center) ** 2 + (y - center) ** 2)
+        
+        # 判斷該點是否在圓的邊緣附近
+        if radius - 0.5 &lt; distance &lt; radius + 0.5:
+            print("＊", end="")  # 使用全形字符 "＊"
+        else:
+            print("　", end="")  # 使用全形空格
+    print()
+</pre>
+<p><br/><br/></p>
+<p><span>心得:上次是做金字塔，這次我嘗試做空心圓，雖然程式我不是自己全部自己寫，但我還是有了解一些一步步學習。下一次可以挑戰更高難度的圖形形狀。</span></p>
 <p>第二題(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/f992fe4f474bf3767bf43d547988cee0/raw/e8bd6b051a7d58696a2e48271581255e507d5ca4/hw2.py">黑色方塊畫圓</a>)</p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/ucbUah3yxc0" width="560"></iframe></p>
-<p><span>  已知可以在網頁中利用 Brython 繪製方格與塗色, 如下連結, 請設法修改此一程式, 直接將程式存入個人的 Gist, 並利用黑色方塊圍出一個圓形區域.</span><span>可以用任何指令做出圖形下次要挑戰更高難度的試試看，我想做做看台灣國旗。</span></p>
-<br />w10 << <a href='w10.html'>Previous</a> <a href='w12.html'>Next</a> >> w12</div>
+<p><span>  已知可以在網頁中利用 Brython 繪製方格與塗色, 如下連結, 請設法修改此一程式, 直接將程式存入個人的 Gist, 並利用黑色方塊圍出一個圓形區域.</span><span>可以用任何指令做出圖形下次要挑戰更高難度的試試看，我想做做看台灣國旗。</span></p><br />w10 << <a href='w10.html'>Previous</a> <a href='w12.html'>Next</a> >> w12</div>
         
     <!-- footer -->
       <div class="container">
