@@ -142,46 +142,54 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2<br /><h1>w13_hw</h1>
-<!-- 導入 brython 程式庫 -->
-<p>
+<!-- 引入 Brython 程式庫 -->
 <script src="./../cmsimde/static/brython.js"></script>
 <script src="./../cmsimde/static/brython_stdlib.js"></script>
-</p>
 <!-- 啟動 Brython -->
-<p>
 <script>
-window.onload=function(){
-brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+window.onload = function() {
+    brython({debug:1, pythonpath:['./../cmsimde/static/', '../../downloads/py/']});
 }
 </script>
-</p>
-<div id="brython_div1"></div>
-<p>
-<script type="text/python3">
+<!-- 設置容器 -->
+<div id="brython div1"></div>
+<!-- 利用 Brython 繪圖 -->
+<script type="text/python">
 from browser import html
 from browser import document as doc
-# 利用 html 建立 canvas 超文件物件
-canvas = html.CANVAS(width=400, height=400)
-brython_div = doc["brython_div1"]
+
+# 利用 HTML 建立 canvas 並定義特性
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython div1"]
 brython_div <= canvas
 ctx = canvas.getContext("2d")
 
-# 繪製兩個矩形
-ctx.strokeStyle = 'red'  # 設定矩形顏色為紅色
-ctx.beginPath() 
-ctx.rect(10, 10, 200, 200)
-ctx.rect(110, 110, 200, 200)
+ctx.strokeStyle = 'red'  # 設定矩形的邊框顏色為紅色
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)  # 第一個正方形的左上角在(100, 100)，邊長200
+ctx.rect(200, 200, 200, 200)  # 第二個正方形的左上角在(200, 200)，邊長200
 ctx.stroke()
 
-ctx.lineWidth = 1
-ctx.strokeStyle = 'blue'  
+# 2. 繪製對角線 (藍色) - 只連接第一個矩形的左上角和第一個矩形的右下角
+ctx.strokeStyle = 'blue'  # 設定對角線顏色為藍色
 ctx.beginPath()
-ctx.moveTo(10, 10)
-ctx.lineTo(210, 210)
+ctx.moveTo(100, 100)  # 起點為第一個矩形的左上角 (100, 100)
+ctx.lineTo(300, 300)  # 終點為第一個矩形的右下角 (300, 300)
 ctx.stroke()
-</script>
-</p>
-<p></p><br />w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
+
+# 3. 繪製兩個外切圓 (黑色)
+ctx.strokeStyle = 'black'  # 設定圓的顏色為黑色
+
+# 第一個矩形的外切圓
+ctx.beginPath()
+ctx.arc(200, 200, 141.4, 0, 2 * 3.14)  # 圓心在(200, 200)，半徑為141.4（sqrt(2) * 邊長的一半）
+ctx.stroke()
+
+# 第二個矩形的外切圓
+ctx.beginPath()
+ctx.arc(300, 300, 141.4, 0, 2 * 3.14)  # 圓心在(300, 300)，半徑為141.4
+ctx.stroke()
+</script><br />w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
         
     <!-- footer -->
       <div class="container">
