@@ -166,6 +166,13 @@ brython_div = doc["brython_div1"]
 brython_div <= canvas
 ctx = canvas.getContext("2d")
 
+# 繪製兩個矩形
+ctx.strokeStyle = 'red'  # 設定矩形顏色為紅色
+ctx.beginPath() 
+ctx.rect(10, 10, 200, 200)
+ctx.rect(110, 110, 200, 200)
+ctx.stroke()
+
 ctx.lineWidth = 1
 ctx.strokeStyle = 'blue'  
 ctx.beginPath()
@@ -173,7 +180,8 @@ ctx.moveTo(10, 10)
 ctx.lineTo(210, 210)
 ctx.stroke()
 </script>
-</p><br />w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
+</p>
+<p></p><br />w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
         
     <!-- footer -->
       <div class="container">
