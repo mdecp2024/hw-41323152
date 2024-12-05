@@ -177,6 +177,8 @@ brython_div = doc["brython div1"]
 brython_div <= canvas
 ctx = canvas.getContext("2d")
 
+
+
 ctx.strokeStyle = 'red'  # 設定矩形的邊框顏色為紅色
 ctx.beginPath()
 ctx.rect(100, 100, 200, 200)  # 第一個正方形的左上角在(100, 100)，邊長200
@@ -202,6 +204,104 @@ ctx.stroke()
 ctx.beginPath()
 ctx.arc(300, 300, 141.4, 0, 2 * 3.14)  # 圓心在(300, 300)，半徑為141.4
 ctx.stroke()
+</script>
+<h4></h4>
+<!-- 引入 Brython 程式庫 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<script>
+window.onload = function() {
+    brython({debug:1, pythonpath:['/static/', '../../downloads/py/']});
+}
+</script>
+<!-- 設置容器 -->
+<div id="brython div1"></div>
+<!-- 利用 Brython 繪圖 -->
+<script type="text/python">
+from browser import html
+from browser import document as doc
+
+# 利用 HTML 建立 canvas 並定義特性
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython div1"]
+brython_div <= canvas
+ctx = canvas.getContext("2d")
+
+# 設置矩形的基本參數
+rect1_x, rect1_y, rect1_size = 100, 100, 200
+rect2_x, rect2_y, rect2_size = 200, 200, 200
+
+# 設置透明顏色調色盤 (RGBA 格式，A表示透明度)
+colors = [
+    'rgba(173, 216, 230, 0.5)',  # 淺藍色，透明度50%
+    'rgba(144, 238, 144, 0.5)',  # 淺綠色，透明度50%
+    'rgba(255, 182, 193, 0.5)',  # 淺粉紅色，透明度50%
+    'rgba(255, 255, 224, 0.5)',  # 淺黃色，透明度50%
+    'rgba(255, 165, 0, 0.5)',    # 淺橙色，透明度50%
+    'rgba(216, 191, 216, 0.5)'   # 淺紫色，透明度50%
+]
+
+# 填充矩形區域
+ctx.fillStyle = colors[0]
+ctx.fillRect(rect1_x, rect1_y, rect1_size, rect1_size)  # 第一個矩形
+ctx.fillStyle = colors[1]
+ctx.fillRect(rect2_x, rect2_y, rect2_size, rect2_size)  # 第二個矩形
+
+# 繪製矩形輪廓
+ctx.strokeStyle = 'red'
+ctx.lineWidth = 2
+ctx.strokeRect(rect1_x, rect1_y, rect1_size, rect1_size)
+ctx.strokeRect(rect2_x, rect2_y, rect2_size, rect2_size)
+
+# 繪製第一個矩形的對角線
+ctx.strokeStyle = 'blue'
+ctx.lineWidth = 1
+ctx.beginPath()
+ctx.moveTo(rect1_x, rect1_y)
+ctx.lineTo(rect1_x + rect1_size, rect1_y + rect1_size)
+ctx.stroke()
+
+# 填充第一個矩形的外切圓
+ctx.fillStyle = colors[2]
+ctx.beginPath()
+ctx.arc(
+    rect1_x + rect1_size / 2,
+    rect1_y + rect1_size / 2,
+    (rect1_size * (2**0.5)) / 2,
+    0, 2 * 3.14
+)
+ctx.fill()
+ctx.strokeStyle = 'black'
+ctx.lineWidth = 1
+ctx.stroke()
+
+# 填充第二個矩形的外切圓
+ctx.fillStyle = colors[3]
+ctx.beginPath()
+ctx.arc(
+    rect2_x + rect2_size / 2,
+    rect2_y + rect2_size / 2,
+    (rect2_size * (2**0.5)) / 2,
+    0, 2 * 3.14
+)
+ctx.fill()
+ctx.stroke()
+
+# 繪製兩個矩形的交集區域，使用不同顏色
+ctx.fillStyle = 'rgba(255, 99, 71, 0.5)'  # 交集區域的顏色 (番茄紅，50% 透明)
+ctx.fillRect(200, 200, 100, 100)  # 交集區域的矩形
+
+# 繪製圓形與矩形的交集區域 (如果有的話)
+ctx.fillStyle = 'rgba(255, 255, 0, 0.5)'  # 交集區域的顏色 (黃色，50% 透明)
+ctx.beginPath()
+ctx.arc(
+    rect2_x + rect2_size / 2,
+    rect2_y + rect2_size / 2,
+    (rect2_size * (2**0.5)) / 2,
+    0, 2 * 3.14
+)
+ctx.fill()
 </script><h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
