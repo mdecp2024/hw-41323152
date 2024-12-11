@@ -142,7 +142,7 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2<br /><h1>w13_hw</h1>
-<p><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/dad0a05c2e9dc9930aa7523fb603dd02eb257804/hw1.py">劃出一條直線和兩個正方形以及外接圓</a></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/dad0a05c2e9dc9930aa7523fb603dd02eb257804/hw1.py">劃出一條直線和兩個正方形以及外接圓</a>)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
 
@@ -196,7 +196,44 @@ from browser import document as doc
 canvas = html.CANVAS(width=600, height=600)
 brython_div = doc["brython div1"]
 brython_div <= canvas
+
 ctx = canvas.getContext("2d")
+ctx.lineWidth = 1
+ 
+# 畫兩個矩形 (紅色邊框)
+ctx.strokeStyle = 'red'
+ctx.beginPath()
+ctx.rect(100, 100, 200, 200)
+ctx.rect(200, 200, 200, 200)
+ctx.stroke()
+ 
+# 畫對角線 (藍色)
+ctx.strokeStyle = 'blue'
+ctx.beginPath()
+ctx.moveTo(100, 100)
+ctx.lineTo(300, 300)
+ctx.stroke()
+ 
+# 畫兩個圓形 (黑色)
+ctx.strokeStyle = 'black'
+ctx.beginPath()
+ctx.arc(200, 200, 141.4, 0, 2 * 3.14)
+ctx.stroke()
+ctx.beginPath()
+ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
+ctx.stroke()
+</script>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/138853512a66a502a30f5a721a0d63b4ba1ddb3f/hw2.py">圖形上色</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
+from browser import document as doc
+
+# 設置畫布
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython_div1"]
+brython_div &lt;= canvas
+
+ctx = canvas.getContext("2d")
+ctx.lineWidth = 1
 
 # 畫兩個矩形 (紅色邊框)
 ctx.strokeStyle = 'red'
@@ -220,7 +257,79 @@ ctx.stroke()
 ctx.beginPath()
 ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
 ctx.stroke()
-</script>
+
+
+# 儲存幾何參數
+shapes = {
+    "circle1": (200, 200, 141.4),
+    "circle2": (300, 300, 141.4),
+    "square1": (100, 100, 300, 300),
+    "square2": (200, 200, 400, 400),
+}
+
+# 簡化的判定函式
+def is_in_circle(x, y, cx, cy, r):
+    return (x - cx) ** 2 + (y - cy) ** 2 &lt; r ** 2
+
+def is_in_square(x, y, x1, y1, x2, y2):
+    return x1 &lt;= x &lt;= x2 and y1 &lt;= y &lt;= y2
+
+# 根據點判定區域並返回顏色
+def get_region_color(x, y):
+    c1 = is_in_circle(x, y, *shapes["circle1"])
+    c2 = is_in_circle(x, y, *shapes["circle2"])
+    s1 = is_in_square(x, y, *shapes["square1"])
+    s2 = is_in_square(x, y, *shapes["square2"])
+
+    # 不在任何圓內
+    if not c1 and not c2:
+        return None
+
+    # 同時在兩個圓內
+    if c1 and c2:
+        return "#FFE153"  
+
+    # 第一個圓的判定
+    if c1:
+        if s1:
+            return "#4A4AFF" if y &lt; x else "#96FED1" 
+        if y &lt; shapes["square1"][1]:
+            return "#1AFD9C"  
+        if y &gt; shapes["square1"][3]:
+            return "#FF0000"  
+        if x &lt; shapes["square1"][0]:
+            return "#A5A552"  
+        if x &gt; shapes["square1"][2]:
+            return "#AD5A5A"  
+
+    # 第二個圓的判定
+    if c2:
+        if s2:
+            return "#D3A4FF"  
+        if y &lt; shapes["square2"][1]:
+            return "#930093"  
+        if y &gt; shapes["square2"][3]:
+            return "#FF359A"  
+        if x &lt; shapes["square2"][0]:
+            return "#8600FF"  
+        if x &gt; shapes["square2"][2]:
+            return "#5B4B00"  
+
+    return "#D3D3D3"  # 
+
+# 繪製掃描點並著色
+def scan_and_draw():
+    step = 1  # 減小步長提升細膩程度
+    for y in range(0, canvas.height, step):
+        for x in range(0, canvas.width, step):
+            color = get_region_color(x, y)
+            if color:
+                ctx.fillStyle = color
+                ctx.fillRect(x, y, step, step)  # 使用細小矩形填充
+
+# 開始掃描和著色
+scan_and_draw()
+</pre>
 <!-- 引入 Brython 程式庫 -->
 <script src="./../cmsimde/static/brython.js"></script>
 <script src="./../cmsimde/static/brython_stdlib.js"></script>
@@ -241,7 +350,10 @@ from browser import document as doc
 canvas = html.CANVAS(width=600, height=600)
 brython_div = doc["brython div1"]
 brython_div <= canvas
+
+
 ctx = canvas.getContext("2d")
+ctx.lineWidth = 1
 
 # 畫兩個矩形 (紅色邊框)
 ctx.strokeStyle = 'red'
