@@ -463,7 +463,109 @@ def scan_and_draw():
 
 # 開始掃描和著色
 scan_and_draw()
-</script><h1>HW 2</h1>
+</script>
+<h3>w14_ex</h3>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/131c3752c3cd25bb85f9d8788b6c9b4b/raw/26c0d9ff8f418d8f3c42cc5be8a1da6b3e84ce69/w14_ex">畫三個圓加顏色並且每次出來的顏色不一樣</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
+from browser import document as doc
+import random
+
+# 定義一個函式來初始化畫布
+def initialize_canvas(canvas_width=400, canvas_height=400, id="brython_div1"):
+    # 創建 canvas 並設置寬度與高度
+    canvas = html.CANVAS(width=canvas_width, height=canvas_height)
+    brython_div = doc[id]
+    brython_div &lt;= canvas
+   
+    # 獲取 canvas 的 2D 上下文
+    ctx = canvas.getContext("2d")
+   
+    return canvas, ctx
+
+# 定義一個隨機顏色生成函式
+def random_color_generator():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    return f"rgb({r}, {g}, {b})"
+
+# 判斷點 (px, py) 是否在圓內
+def is_point_in_circle(px, py, cx, cy, r):
+    return (px - cx) ** 2 + (py - cy) ** 2 &lt;= r ** 2
+
+# 使用者設定的圓心座標和半徑，並進行掃描線填充
+def draw_circles(x1, y1, r1, x2, y2, r2, x3, y3, r3):
+    # 初始化畫布
+    canvas, ctx = initialize_canvas(400, 400)
+   
+    # 清除畫布
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+   
+    # 顏色區域存儲
+    color_dict = {}
+
+    # 使用掃描線方法填充區域
+    for py in range(0, canvas.height):
+        # 逐行掃描，判斷每個點是否在圓內
+        current_color = None  # 當前掃描線區域的顏色
+        for px in range(0, canvas.width):
+            in_circle1 = is_point_in_circle(px, py, x1, y1, r1)
+            in_circle2 = is_point_in_circle(px, py, x2, y2, r2)
+            in_circle3 = is_point_in_circle(px, py, x3, y3, r3)
+           
+            if in_circle1 and in_circle2 and in_circle3:
+                # 交集區域
+                if "intersection" not in color_dict:
+                    color_dict["intersection"] = random_color_generator()
+                current_color = color_dict["intersection"]
+            elif in_circle1 and in_circle2:
+                # 只在圓1與圓2的交集區域
+                if "circle1_circle2" not in color_dict:
+                    color_dict["circle1_circle2"] = random_color_generator()
+                current_color = color_dict["circle1_circle2"]
+            elif in_circle2 and in_circle3:
+                # 只在圓2與圓3的交集區域
+                if "circle2_circle3" not in color_dict:
+                    color_dict["circle2_circle3"] = random_color_generator()
+                current_color = color_dict["circle2_circle3"]
+            elif in_circle1 and in_circle3:
+                # 只在圓1與圓3的交集區域
+                if "circle1_circle3" not in color_dict:
+                    color_dict["circle1_circle3"] = random_color_generator()
+                current_color = color_dict["circle1_circle3"]
+            elif in_circle1:
+                # 只在圓1內
+                if "circle1" not in color_dict:
+                    color_dict["circle1"] = random_color_generator()
+                current_color = color_dict["circle1"]
+            elif in_circle2:
+                # 只在圓2內
+                if "circle2" not in color_dict:
+                    color_dict["circle2"] = random_color_generator()
+                current_color = color_dict["circle2"]
+            elif in_circle3:
+                # 只在圓3內
+                if "circle3" not in color_dict:
+                    color_dict["circle3"] = random_color_generator()
+                current_color = color_dict["circle3"]
+            else:
+                # 點不在圓內，畫外區域
+                current_color = "white"  # 背景色白色
+
+            # 填充顏色
+            ctx.fillStyle = current_color
+            ctx.fillRect(px, py, 1, 1)  # 填充一個像素
+
+# 三個圓心和半徑的設定
+# 假設三個圓心分佈成等邊三角形的頂點，並設置它們的半徑
+radius = 100  # 圓的半徑
+x1, y1 = 150, 200  # 圓1 圓心
+x2, y2 = 250, 200  # 圓2 圓心
+x3, y3 = 200, 100  # 圓3 圓心
+
+# 呼叫畫圓函式
+draw_circles(x1, y1, radius, x2, y2, radius, x3, y3, radius)</pre>
+<p></p><h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
 <p>延續 HW 1 網頁資料整理與程式練習方法, 整理下列內容 (20%):</p>
