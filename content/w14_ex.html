@@ -147,6 +147,12 @@ img.add_border {
 from browser import document as doc
 import random
 
+# 利用 HTML 建立 canvas 並定義特性
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython div1"]
+brython_div &lt;= canvas
+ctx = canvas.getContext("2d")
+
 # 定義一個函式來初始化畫布
 def initialize_canvas(canvas_width=400, canvas_height=400, id="brython_div1"):
     # 創建 canvas 並設置寬度與高度
@@ -242,7 +248,7 @@ x3, y3 = 200, 100  # 圓3 圓心
 
 # 呼叫畫圓函式
 draw_circles(x1, y1, radius, x2, y2, radius, x3, y3, radius)</pre>
-<p></p><br />w13_hw << <a href='w13_hw.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
+<p><img alt="" height="490" src="./../images/螢幕擷取畫面 2024-12-18 012917.png" width="566"/></p><br />w13_hw << <a href='w13_hw.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
         
     <!-- footer -->
       <div class="container">
