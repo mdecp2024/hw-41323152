@@ -162,6 +162,18 @@ total = addto(1, 100)
 
 # 最後印出總和
 print(f"最終總和：{total}")</pre>
+<p></p>
+<p>題目三:<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/cbf6d755ae7b0aa58429649e917c8602/raw/ff67b228f501c96bc28cf3c7204517ea97d54cf7/ex3.py">"add_only_even" </a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def add_only_even(start, end):
+    # 使用 range() 生成從 start 到 end 的數列，但只挑選偶數
+    even_numbers = range(start + (start % 2), end + 1, 2)  # 調整起始點為偶數，並以步長 2 前進
+    return sum(even_numbers)
+
+# 呼叫函式，計算從 1 加到 100 的偶數總和
+total = add_only_even(1, 100)
+
+# 印出計算結果
+print(total)  # 輸出偶數總和結果</pre>
 <p></p><br />w14_ex << <a href='w14_ex.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
         
     <!-- footer -->
