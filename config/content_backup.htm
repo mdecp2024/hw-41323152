@@ -605,6 +605,20 @@ total = add_only_even(1, 100)
 
 # 印出計算結果
 print(total)  # 輸出偶數總和結果</pre>
+<p></p>
+<p>題目四:<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/cbf6d755ae7b0aa58429649e917c8602/raw/ff67b228f501c96bc28cf3c7204517ea97d54cf7/ex4.py">"<span>add_avoid_8"</span></a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def add_avoid_8(start, end):
+    total = 0
+    for num in range(start, end + 1):
+        if '8' not in str(num):  # 檢查數字是否包含 "8"
+            total += num
+    return total
+
+# 呼叫函式，計算從 1 加到 100 並避免數字包含 "8" 的總和
+total = add_avoid_8(1, 100)
+
+# 印出計算結果
+print(total)  # 輸出避開 "8" 的總和結果</pre>
 <p></p><h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
