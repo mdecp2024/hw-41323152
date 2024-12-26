@@ -141,7 +141,110 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3<br /><h1>w16_exam1</h1><br />HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3</div>
+    <div id="tipue_search_content">HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3<br /><h1>w16_exam1</h1>
+<p><span>以</span><span>自己的學號最後四碼</span><span>作為繪圖的座標原點, (例如: 若學號最後四碼為 3932, 請將 (39, 32) 作為繪圖座標原點), 並以 pixel=2 的黑色直線分別利用 Brython 繪圖, 標示出向右為正的 X 軸, 以及向下為正的 Y 軸。</span></p>
+<p><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/892454c43bb6ff70b924336fe4a25fdc/raw/6580500fab31db19dc43dd5b478d2cd811b13cd3/w16_exam1.py">"圖形'</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document, html
+import math
+
+# 初始化 HTML，確保 canvas 元素存在
+def setup_canvas():
+    if not document.querySelector("#my_canvas"):
+        canvas = html.CANVAS(id="my_canvas", width=800, height=600)
+        document &lt;= canvas
+
+# 繪製多邊形（傳入中心座標、邊數和半徑）
+def draw_polygon(ctx, center_x, center_y, sides, radius, color):
+    ctx.beginPath()
+    for i in range(sides):
+        angle = i * (2 * math.pi / sides)
+        x = center_x + radius * math.cos(angle)
+        y = center_y + radius * math.sin(angle)
+        if i == 0:
+            ctx.moveTo(x, y)
+        else:
+            ctx.lineTo(x, y)
+    ctx.closePath()
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 繪製矩形
+def draw_rectangle(ctx, x, y, width, height, color):
+    ctx.beginPath()
+    ctx.rect(x, y, width, height)
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 初始化畫布
+setup_canvas()
+
+# 設定 canvas 和繪圖上下文
+canvas = document["my_canvas"]
+ctx = canvas.getContext("2d")
+
+# 設定原點 (31, 52)
+origin_x, origin_y = 31, 52
+
+# 繪製坐標軸
+def draw_axes():
+    ctx.beginPath()
+    ctx.moveTo(origin_x, origin_y)
+    ctx.lineTo(500, origin_y)  # X 軸
+    ctx.strokeStyle = "black"
+    ctx.lineWidth = 2
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.moveTo(origin_x, origin_y)
+    ctx.lineTo(origin_x, 300)  # Y 軸
+    ctx.stroke()
+
+    # 標註原點
+    ctx.font = "12px Arial"
+    ctx.fillStyle = "black"
+    ctx.fillText("(31, 52)", origin_x + 5, origin_y - 5)
+
+# 繪製圖形
+def draw_shapes():
+    # 繪製六邊形 (橙色)
+    draw_polygon(ctx, origin_x + 68, origin_y + 59, 6, 30, "orange")
+
+    # 繪製菱形 (青色)
+    ctx.beginPath()
+    ctx.moveTo(origin_x + 128, origin_y + 29)
+    ctx.lineTo(origin_x + 148, origin_y + 59)
+    ctx.lineTo(origin_x + 128, origin_y + 89)
+    ctx.lineTo(origin_x + 108, origin_y + 59)
+    ctx.closePath()
+    ctx.fillStyle = "teal"
+    ctx.fill()
+
+    # 繪製三角形 (藍色)
+    ctx.beginPath()
+    ctx.moveTo(origin_x + 133, origin_y + 89)
+    ctx.lineTo(origin_x + 173, origin_y + 89)
+    ctx.lineTo(origin_x + 153, origin_y + 59)
+    ctx.closePath()
+    ctx.fillStyle = "blue"
+    ctx.fill()
+
+    # 繪製圓形 (粉紅色)
+    ctx.beginPath()
+    ctx.arc(origin_x + 198, origin_y + 59, 30, 0, 2 * math.pi)
+    ctx.fillStyle = "pink"
+    ctx.fill()
+
+    # 繪製正方形 (黃色)
+    draw_rectangle(ctx, origin_x + 233, origin_y + 34, 50, 50, "yellow")
+
+    # 繪製矩形 (藍色)
+    draw_rectangle(ctx, origin_x + 288, origin_y + 49, 60, 20, "blue")
+
+# 繪製坐標軸和圖形
+draw_axes()
+draw_shapes()
+</pre>
+<p></p><br />HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3</div>
         
     <!-- footer -->
       <div class="container">
