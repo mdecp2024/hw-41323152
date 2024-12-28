@@ -190,17 +190,22 @@ ctx.beginPath()
 ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
 ctx.stroke()</pre>
 <!-- 引入 Brython 程式庫 -->
+<p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
+</p>
 <!-- 啟動 Brython -->
+<p>
 <script>
 window.onload = function() {
     brython({debug:1, pythonpath:['/static/', '../../downloads/py/']});
 }
 </script>
+</p>
 <!-- 設置容器 -->
 <div id="brython div1"></div>
 <!-- 利用 Brython 繪圖 -->
+<p>
 <script type="text/python">
 from browser import html
 from browser import document as doc
@@ -236,6 +241,7 @@ ctx.beginPath()
 ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
 ctx.stroke()
 </script>
+</p>
 <p></p>
 <p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/138853512a66a502a30f5a721a0d63b4ba1ddb3f/hw2.py">圖形上色</a>)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
@@ -345,17 +351,22 @@ def scan_and_draw():
 scan_and_draw()
 </pre>
 <!-- 引入 Brython 程式庫 -->
+<p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
+</p>
 <!-- 啟動 Brython -->
+<p>
 <script>
 window.onload = function() {
     brython({debug:1, pythonpath:['/static/', '../../downloads/py/']});
 }
 </script>
+</p>
 <!-- 設置容器 -->
 <div id="brython div1"></div>
 <!-- 利用 Brython 繪圖 -->
+<p>
 <script type="text/python">
 from browser import html
 from browser import document as doc
@@ -464,6 +475,7 @@ def scan_and_draw():
 # 開始掃描和著色
 scan_and_draw()
 </script>
+</p>
 <h3>w14_ex</h3>
 <p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/131c3752c3cd25bb85f9d8788b6c9b4b/raw/26c0d9ff8f418d8f3c42cc5be8a1da6b3e84ce69/w14_ex">畫三個圓加顏色並且每次出來的顏色不一樣</a>)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
@@ -636,7 +648,8 @@ total = add_avoid_3_and_8(start, end)
 # 印出計算結果
 print(f"從 {start} 到 {end} 的數字總和（排除包含 '3' 和 '8' 的數字）為：{total}")
 </pre>
-<p></p><h1>HW 2</h1>
+<p></p>
+<h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
 <p>延續 HW 1 網頁資料整理與程式練習方法, 整理下列內容 (20%):</p>
@@ -753,7 +766,115 @@ draw_axes()
 draw_shapes()
 </pre>
 <p></p>
-<p><br/><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p><h1>HW 3</h1>
+<p></p>
+<p><canvas height="600" id="my_canvas" width="800"></canvas></p>
+<script type="application/javascript">
+// 初始化 HTML，確保 canvas 元素存在
+        function setupCanvas() {
+            const canvas = document.querySelector("#my_canvas");
+            if (!canvas) {
+                alert("Canvas 元素未找到！");
+                return null;
+            }
+            return canvas.getContext("2d");
+        }
+
+        // 繪製多邊形（傳入中心座標、邊數和半徑）
+        function drawPolygon(ctx, centerX, centerY, sides, radius, color) {
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const angle = i * (2 * Math.PI / sides);
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        // 繪製矩形
+        function drawRectangle(ctx, x, y, width, height, color) {
+            ctx.beginPath();
+            ctx.rect(x, y, width, height);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        // 設定原點 (31, 52)
+        const originX = 31;
+        const originY = 52;
+
+        // 繪製坐標軸
+        function drawAxes(ctx) {
+            ctx.beginPath();
+            ctx.moveTo(originX, originY);
+            ctx.lineTo(500, originY); // X 軸
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(originX, originY);
+            ctx.lineTo(originX, 300); // Y 軸
+            ctx.stroke();
+
+            // 標註原點
+            ctx.font = "12px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("(31, 52)", originX + 5, originY - 5);
+        }
+
+        // 繪製圖形
+        function drawShapes(ctx) {
+            // 繪製六邊形 (橙色)
+            drawPolygon(ctx, originX + 68, originY + 59, 6, 30, "orange");
+
+            // 繪製菱形 (青色)
+            ctx.beginPath();
+            ctx.moveTo(originX + 128, originY + 29);
+            ctx.lineTo(originX + 148, originY + 59);
+            ctx.lineTo(originX + 128, originY + 89);
+            ctx.lineTo(originX + 108, originY + 59);
+            ctx.closePath();
+            ctx.fillStyle = "teal";
+            ctx.fill();
+
+            // 繪製三角形 (藍色)
+            ctx.beginPath();
+            ctx.moveTo(originX + 133, originY + 89);
+            ctx.lineTo(originX + 173, originY + 89);
+            ctx.lineTo(originX + 153, originY + 59);
+            ctx.closePath();
+            ctx.fillStyle = "blue";
+            ctx.fill();
+
+            // 繪製圓形 (粉紅色)
+            ctx.beginPath();
+            ctx.arc(originX + 198, originY + 59, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = "pink";
+            ctx.fill();
+
+            // 繪製正方形 (黃色)
+            drawRectangle(ctx, originX + 233, originY + 34, 50, 50, "yellow");
+
+            // 繪製矩形 (藍色)
+            drawRectangle(ctx, originX + 288, originY + 49, 60, 20, "blue");
+        }
+
+        // 主執行流程
+        const ctx = setupCanvas();
+        if (ctx) {
+            drawAxes(ctx);
+            drawShapes(ctx);
+        }
+</script>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p>
+<h1>HW 3</h1>
 <h4>主題: Python 的數字、演算法與迴圈 (20%)</h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 4 and Part 5</p>
 <p>完成上述流程整理後, 請將 HW3 自評分數輸入 cp2024 自評表單中.</p>
@@ -826,17 +947,22 @@ for start, end in maze_lines:
 # 結束繪製
 ctx.stroke()</pre>
 <!-- 引入 Brython 程式庫 -->
+<p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
+</p>
 <!-- 啟動 Brython -->
+<p>
 <script>
 window.onload = function() {
     brython({debug:1, pythonpath:['/static/', '../../downloads/py/']});
 }
 </script>
+</p>
 <!-- 設置容器 -->
 <div id="brython div1"></div>
 <!-- 利用 Brython 繪圖 -->
+<p>
 <script type="text/python">
 from browser import html
 from browser import document as doc
@@ -898,7 +1024,10 @@ for start, end in maze_lines:
 
 # 結束繪製
 ctx.stroke()
-</script><h1>HW 4</h1>
+</script>
+</p>
+<br/><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/Vidz63XrnDo" width="560"></iframe>    
+<h1>HW 4</h1>
 <h4>主題: 利用 Python 控制機電模擬系統 (20%)</h4>
 <p style="padding-left: 30px;">利用 <a href="https://solvespace.com/">https://solvespace.com/</a> 建立機械系統零組件</p>
 <p style="padding-left: 30px;">利用 <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> 建立機電模擬系統</p>

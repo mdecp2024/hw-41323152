@@ -246,7 +246,115 @@ draw_axes()
 draw_shapes()
 </pre>
 <p></p>
-<p><br/><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p><br />HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3</div>
+<p></p>
+<p><canvas height="600" id="my_canvas" width="800"></canvas></p>
+<script type="application/javascript">
+// 初始化 HTML，確保 canvas 元素存在
+        function setupCanvas() {
+            const canvas = document.querySelector("#my_canvas");
+            if (!canvas) {
+                alert("Canvas 元素未找到！");
+                return null;
+            }
+            return canvas.getContext("2d");
+        }
+
+        // 繪製多邊形（傳入中心座標、邊數和半徑）
+        function drawPolygon(ctx, centerX, centerY, sides, radius, color) {
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const angle = i * (2 * Math.PI / sides);
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        // 繪製矩形
+        function drawRectangle(ctx, x, y, width, height, color) {
+            ctx.beginPath();
+            ctx.rect(x, y, width, height);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        // 設定原點 (31, 52)
+        const originX = 31;
+        const originY = 52;
+
+        // 繪製坐標軸
+        function drawAxes(ctx) {
+            ctx.beginPath();
+            ctx.moveTo(originX, originY);
+            ctx.lineTo(500, originY); // X 軸
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(originX, originY);
+            ctx.lineTo(originX, 300); // Y 軸
+            ctx.stroke();
+
+            // 標註原點
+            ctx.font = "12px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("(31, 52)", originX + 5, originY - 5);
+        }
+
+        // 繪製圖形
+        function drawShapes(ctx) {
+            // 繪製六邊形 (橙色)
+            drawPolygon(ctx, originX + 68, originY + 59, 6, 30, "orange");
+
+            // 繪製菱形 (青色)
+            ctx.beginPath();
+            ctx.moveTo(originX + 128, originY + 29);
+            ctx.lineTo(originX + 148, originY + 59);
+            ctx.lineTo(originX + 128, originY + 89);
+            ctx.lineTo(originX + 108, originY + 59);
+            ctx.closePath();
+            ctx.fillStyle = "teal";
+            ctx.fill();
+
+            // 繪製三角形 (藍色)
+            ctx.beginPath();
+            ctx.moveTo(originX + 133, originY + 89);
+            ctx.lineTo(originX + 173, originY + 89);
+            ctx.lineTo(originX + 153, originY + 59);
+            ctx.closePath();
+            ctx.fillStyle = "blue";
+            ctx.fill();
+
+            // 繪製圓形 (粉紅色)
+            ctx.beginPath();
+            ctx.arc(originX + 198, originY + 59, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = "pink";
+            ctx.fill();
+
+            // 繪製正方形 (黃色)
+            drawRectangle(ctx, originX + 233, originY + 34, 50, 50, "yellow");
+
+            // 繪製矩形 (藍色)
+            drawRectangle(ctx, originX + 288, originY + 49, 60, 20, "blue");
+        }
+
+        // 主執行流程
+        const ctx = setupCanvas();
+        if (ctx) {
+            drawAxes(ctx);
+            drawShapes(ctx);
+        }
+</script>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p>
+<br />HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3</div>
         
     <!-- footer -->
       <div class="container">
