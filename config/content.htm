@@ -873,8 +873,7 @@ draw_shapes()
             drawShapes(ctx);
         }
 </script>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p>
-<h1>HW 3</h1>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p><h1>HW 3</h1>
 <h4>主題: Python 的數字、演算法與迴圈 (20%)</h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 4 and Part 5</p>
 <p>完成上述流程整理後, 請將 HW3 自評分數輸入 cp2024 自評表單中.</p>
@@ -1038,7 +1037,99 @@ ctx.stroke()
 <h2>HW 4 Exam</h2>
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 4 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
-<h1>Final Report</h1>
+<p></p>
+<p></p>
+<p></p>
+<h3>w16_exam3</h3>
+<p><span>利用紅色連續線段標示從上方入口, 走至下方出口的路線圖</span></p>
+<p><span><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/892454c43bb6ff70b924336fe4a25fdc/raw/330f60b2c8586171409f961d86b407e6c918d3e9/w16_exam3.py">迷宮路徑解答</a></span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
+from browser import document as doc
+
+
+# 設定迷宮畫布大小
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython_div1"]
+brython_div &lt;= canvas
+
+# 取得 canvas 的繪圖上下文
+ctx = canvas.getContext("2d")
+
+# 標示左上方點座標 (31, 52)
+ctx.font = "12px Arial"
+ctx.fillStyle = "red"
+ctx.fillText("(31, 52)", 35, 42)
+
+# 定義藍色線條的屬性
+ctx.strokeStyle = "blue"
+ctx.lineWidth = 2
+
+# 設定迷宮起點的偏移量
+offset_x, offset_y = 31, 52
+
+# 迷宮的線條座標
+maze_lines = [
+    ((0, 0), (86, 0)),
+    ((0, 0), (0, 200)),
+    ((120, 0), (200, 0)),
+    ((200, 0), (200, 200)),
+    ((120, 200), (200, 200)),
+    ((0, 200), (86, 200)),
+    ((86, 157), (86, 200)),
+    ((86, 157), (126, 157)),
+    ((160, 120), (160, 200)),
+    ((160, 120), (50, 120)),
+    ((50, 120), (50, 163)),
+    ((126, 80), (126, 120)),
+    ((0, 80), (86, 80)),
+    ((86, 40), (86, 80)),
+    ((40, 40), (160, 40)),
+    ((160, 40), (160, 83)),
+]
+
+# 使用輔助函數來簡化畫線的過程
+def draw_line(start, end):
+    ctx.moveTo(offset_x + start[0], offset_y + start[1])
+    ctx.lineTo(offset_x + end[0], offset_y + end[1])
+
+# 繪製迷宮
+ctx.beginPath()
+for start, end in maze_lines:
+    draw_line(start, end)
+ctx.stroke()
+
+# 定義紅色路徑屬性
+ctx.strokeStyle = "red"
+ctx.lineWidth = 3
+
+# 解答路徑
+path_solution = [
+    (100, 0),    
+    (100, 20),   
+    (180, 20),  
+    (180, 100),  
+    (140, 100), 
+    (140, 60), 
+    (100, 60),
+    (100,100),
+    (25,100),
+    (25,180),
+    (65,180),
+    (65,140),
+    (140,140),
+    (140,180),
+    (100,180),
+    (100,200),
+]
+
+# 繪製紅色路徑
+ctx.beginPath()
+for i in range(len(path_solution) - 1):
+    start = path_solution[i]
+    end = path_solution[i + 1]
+    draw_line(start, end)
+ctx.stroke()</pre>
+<p></p><h1>Final Report</h1>
 <p>期末口頭與書面專題報告 (20%)</p>
 <p>期末口頭專題報告影片:</p>
 <p style="padding-left: 30px;">......</p>
