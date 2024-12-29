@@ -144,14 +144,14 @@ img.add_border {
     <div id="tipue_search_content">HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3<br /><h1>w16_exam1</h1>
 <p><span>以</span><span>自己的學號最後四碼</span><span>作為繪圖的座標原點, (例如:</span></p>
 <p><span>若學號最後四碼為 3932, 請將 (39, 32) 作為繪圖座標原點), 並以 pixel=2 的黑色直線分別利用 Brython 繪圖, 標示出向右為正的 X 軸, 以及向下為正的 Y 軸。</span></p>
-<p><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/892454c43bb6ff70b924336fe4a25fdc/raw/6580500fab31db19dc43dd5b478d2cd811b13cd3/w16_exam1.py">"圖形''</a></p>
+<p><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/892454c43bb6ff70b924336fe4a25fdc/raw/c1a9e9360e55c4d449da93f20f9f2327573fe32a/w16_exam1.py">"圖形''</a></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document, html
 import math
 
 # 初始化 HTML，確保 canvas 元素存在
 def setup_canvas():
     if not document.querySelector("#my_canvas"):
-        canvas = html.CANVAS(id="my_canvas", width=800, height=600)
+        canvas = html.CANVAS(id="my_canvas", width=500, height=300)
         document &lt;= canvas
 
 # 繪製多邊形（傳入中心座標、邊數和半徑）
@@ -247,7 +247,7 @@ draw_shapes()
 </pre>
 <p></p>
 <p></p>
-<p><canvas height="600" id="my_canvas" width="800"></canvas></p>
+<p><canvas height="300" id="my_canvas" width="500"></canvas></p>
 <script type="application/javascript">
 // 初始化 HTML，確保 canvas 元素存在
         function setupCanvas() {
@@ -353,7 +353,8 @@ draw_shapes()
             drawShapes(ctx);
         }
 </script>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p><br />HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3</div>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p>
+<br />HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3</div>
         
     <!-- footer -->
       <div class="container">

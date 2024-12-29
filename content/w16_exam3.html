@@ -230,7 +230,110 @@ for i in range(len(path_solution) - 1):
     end = path_solution[i + 1]
     draw_line(start, end)
 ctx.stroke()</pre>
-<p></p><br />HW 4 Exam << <a href='HW 4 Exam.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report</div>
+<p></p>
+<!-- 引入 Brython 程式庫 -->
+<script src="./../cmsimde/static/brython.js"></script>
+<script src="./../cmsimde/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<script>
+window.onload = function() {
+    brython({debug:1, pythonpath:['./../cmsimde/static/', '../../downloads/py/']});
+}
+</script>
+<!-- 設置容器 -->
+<div id="brython div1"></div>
+<!-- 利用 Brython 繪圖 -->
+<script type="text/python">
+from browser import html
+from browser import document as doc
+
+ 
+
+# 利用 HTML 建立 canvas 並定義特性
+canvas = html.CANVAS(width=300, height=300)
+brython_div = doc["brython div1"]
+brython_div <= canvas
+
+ctx = canvas.getContext("2d")
+ctx.lineWidth = 1
+
+# 標示左上方點座標 (31, 52)
+ctx.font = "12px Arial"
+ctx.fillStyle = "red"
+ctx.fillText("(31, 52)", 35, 42)
+ 
+# 定義藍色線條的屬性
+ctx.strokeStyle = "blue"
+ctx.lineWidth = 2
+ 
+# 設定迷宮起點的偏移量
+offset_x, offset_y = 31, 52
+ 
+# 迷宮的線條座標
+maze_lines = [
+    ((0, 0), (86, 0)),
+    ((0, 0), (0, 200)),
+    ((120, 0), (200, 0)),
+    ((200, 0), (200, 200)),
+    ((120, 200), (200, 200)),
+    ((0, 200), (86, 200)),
+    ((86, 157), (86, 200)),
+    ((86, 157), (126, 157)),
+    ((160, 120), (160, 200)),
+    ((160, 120), (50, 120)),
+    ((50, 120), (50, 163)),
+    ((126, 80), (126, 120)),
+    ((0, 80), (86, 80)),
+    ((86, 40), (86, 80)),
+    ((40, 40), (160, 40)),
+    ((160, 40), (160, 83)),
+]
+ 
+# 使用輔助函數來簡化畫線的過程
+def draw_line(start, end):
+    ctx.moveTo(offset_x + start[0], offset_y + start[1])
+    ctx.lineTo(offset_x + end[0], offset_y + end[1])
+ 
+# 繪製迷宮
+ctx.beginPath()
+for start, end in maze_lines:
+    draw_line(start, end)
+ctx.stroke()
+ 
+# 定義紅色路徑屬性
+ctx.strokeStyle = "red"
+ctx.lineWidth = 3
+ 
+# 解答路徑
+path_solution = [
+    (100, 0),    
+    (100, 20),   
+    (180, 20),  
+    (180, 100),  
+    (140, 100), 
+    (140, 60), 
+    (100, 60),
+    (100,100),
+    (25,100),
+    (25,180),
+    (65,180),
+    (65,140),
+    (140,140),
+    (140,180),
+    (100,180),
+    (100,200),
+]
+ 
+# 繪製紅色路徑
+ctx.beginPath()
+for i in range(len(path_solution) - 1):
+    start = path_solution[i]
+    end = path_solution[i + 1]
+    draw_line(start, end)
+ctx.stroke()
+</script>
+<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/vHxk0_PAmtI" width="560"></iframe>
+<br />HW 4 Exam << <a href='HW 4 Exam.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report</div>
         
     <!-- footer -->
       <div class="container">
