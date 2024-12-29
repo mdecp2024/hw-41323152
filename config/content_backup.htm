@@ -57,6 +57,7 @@
 <p><span>熟悉 ShareX 拍攝電腦操作流程影片</span></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/fkXiEP6zj10" width="560"></iframe></p>
 <p></p>
+<p></p>
 <h3>w10</h3>
 <p><span>題目一:</span></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/jXY4EoEcrNY" width="560"></iframe></p>
@@ -204,167 +205,118 @@ window.onload = function() {
 </p>
 <!-- 設置容器 -->
 <div id="brython div1"></div>
-<!-- 利用 Brython 繪圖 -->
-<p>
-<script type="text/python">
-from browser import html
-from browser import document as doc
-
-# 利用 HTML 建立 canvas 並定義特性
-canvas = html.CANVAS(width=600, height=600)
-brython_div = doc["brython div1"]
-brython_div <= canvas
-
-ctx = canvas.getContext("2d")
-ctx.lineWidth = 1
- 
-# 畫兩個矩形 (紅色邊框)
-ctx.strokeStyle = 'red'
-ctx.beginPath()
-ctx.rect(100, 100, 200, 200)
-ctx.rect(200, 200, 200, 200)
-ctx.stroke()
- 
-# 畫對角線 (藍色)
-ctx.strokeStyle = 'blue'
-ctx.beginPath()
-ctx.moveTo(100, 100)
-ctx.lineTo(300, 300)
-ctx.stroke()
- 
-# 畫兩個圓形 (黑色)
-ctx.strokeStyle = 'black'
-ctx.beginPath()
-ctx.arc(200, 200, 141.4, 0, 2 * 3.14)
-ctx.stroke()
-ctx.beginPath()
-ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
-ctx.stroke()
-</script>
-</p>
-<p></p>
-<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/138853512a66a502a30f5a721a0d63b4ba1ddb3f/hw2.py">圖形上色</a>)</p>
+<div><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/6751466ba419b17088b27b4f9bbec2f9985a1cb5/hw2.py">圖形上色</a></div>
+<div>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
+import math
 
 # 設置畫布
-canvas = html.CANVAS(width=600, height=600)
+canvas = html.CANVAS(width=500, height=500)
 brython_div = doc["brython_div1"]
 brython_div &lt;= canvas
 
 ctx = canvas.getContext("2d")
-ctx.lineWidth = 1
-
-# 畫兩個矩形 (紅色邊框)
-ctx.strokeStyle = 'red'
-ctx.beginPath()
-ctx.rect(100, 100, 200, 200)
-ctx.rect(200, 200, 200, 200)
-ctx.stroke()
+ctx.lineWidth = 3
 
 # 畫對角線 (藍色)
 ctx.strokeStyle = 'blue'
 ctx.beginPath()
-ctx.moveTo(100, 100)
-ctx.lineTo(300, 300)
+ctx.moveTo(60, 60)
+ctx.lineTo(260, 260)
 ctx.stroke()
 
-# 畫兩個圓形 (黑色)
+
+# 設置混色模式為 "screen"
+ctx.globalCompositeOperation = "screen"
+
+
+# 畫第一個圓，分成四個扇形區域
 ctx.strokeStyle = 'black'
+# 第一個圓的四個區域
 ctx.beginPath()
-ctx.arc(200, 200, 141.4, 0, 2 * 3.14)
+ctx.arc(160, 160, 141, 0.25 * math.pi, 0.75 * math.pi)
+ctx.fillStyle = "#2E8B57" 
+ctx.fill()
 ctx.stroke()
+
 ctx.beginPath()
-ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
+ctx.arc(160, 160, 141, 0.75 * math.pi, 1.25 * math.pi)
+ctx.fillStyle = "#C0392B"  
+ctx.fill()
 ctx.stroke()
 
+ctx.beginPath()
+ctx.arc(160, 160, 141, 1.25 * math.pi, 1.75 * math.pi)
+ctx.fillStyle = "#006400"  
+ctx.fill()
+ctx.stroke()
 
-# 儲存幾何參數
-shapes = {
-    "circle1": (200, 200, 141.4),
-    "circle2": (300, 300, 141.4),
-    "square1": (100, 100, 300, 300),
-    "square2": (200, 200, 400, 400),
-}
+ctx.beginPath()
+ctx.arc(160, 160, 141, 1.75 * math.pi, 0.25 * math.pi)
+ctx.fillStyle = "#F75000"  
+ctx.fill()
+ctx.stroke()
 
-# 簡化的判定函式
-def is_in_circle(x, y, cx, cy, r):
-    return (x - cx) ** 2 + (y - cy) ** 2 &lt; r ** 2
+# 畫第二個圓，分成四個扇形區域
+ctx.beginPath()
+ctx.arc(260, 260, 141, 1.25 * math.pi, 1.75 * math.pi)
+ctx.fillStyle = "#4B0082"  
+ctx.fill()
+ctx.stroke()
 
-def is_in_square(x, y, x1, y1, x2, y2):
-    return x1 &lt;= x &lt;= x2 and y1 &lt;= y &lt;= y2
+ctx.beginPath()
+ctx.arc(260, 260, 141, 1.75 * math.pi, 0.25 * math.pi)
+ctx.fillStyle = "#556B2F" 
+ctx.fill()
+ctx.stroke()
 
-# 根據點判定區域並返回顏色
-def get_region_color(x, y):
-    c1 = is_in_circle(x, y, *shapes["circle1"])
-    c2 = is_in_circle(x, y, *shapes["circle2"])
-    s1 = is_in_square(x, y, *shapes["square1"])
-    s2 = is_in_square(x, y, *shapes["square2"])
+ctx.beginPath()
+ctx.arc(260, 260, 141, 0.25 * math.pi, 0.75 * math.pi)
+ctx.fillStyle = "#FF8C00"  
+ctx.fill()
+ctx.stroke()
 
-    # 不在任何圓內
-    if not c1 and not c2:
-        return None
+ctx.beginPath()
+ctx.arc(260, 260, 141, 0.75 * math.pi, 1.25 * math.pi)
+ctx.fillStyle = "#8B008B"  
+ctx.fill()
+ctx.stroke()
 
-    # 同時在兩個圓內
-    if c1 and c2:
-        return "#FFE153"  
+# 畫紅色矩形，分成四個三角形
+ctx.strokeStyle = 'red'
+ctx.beginPath()
+ctx.moveTo(60, 60)
+ctx.lineTo(60, 260)
+ctx.lineTo(260, 260)
+ctx.fillStyle = "#B8860B" 
+ctx.fill()
+ctx.stroke()
 
-    # 第一個圓的判定
-    if c1:
-        if s1:
-            return "#4A4AFF" if y &lt; x else "#96FED1" 
-        if y &lt; shapes["square1"][1]:
-            return "#1AFD9C"  
-        if y &gt; shapes["square1"][3]:
-            return "#FF0000"  
-        if x &lt; shapes["square1"][0]:
-            return "#A5A552"  
-        if x &gt; shapes["square1"][2]:
-            return "#AD5A5A"  
+ctx.beginPath()
+ctx.moveTo(60, 60)
+ctx.lineTo(260, 60)
+ctx.lineTo(260, 260)
+ctx.fillStyle = "#3E1C41" 
+ctx.fill()
+ctx.stroke()
 
-    # 第二個圓的判定
-    if c2:
-        if s2:
-            return "#D3A4FF"  
-        if y &lt; shapes["square2"][1]:
-            return "#930093"  
-        if y &gt; shapes["square2"][3]:
-            return "#FF359A"  
-        if x &lt; shapes["square2"][0]:
-            return "#8600FF"  
-        if x &gt; shapes["square2"][2]:
-            return "#5B4B00"  
+ctx.beginPath()
+ctx.moveTo(160, 160)
+ctx.lineTo(360, 160)
+ctx.lineTo(360, 360)
+ctx.fillStyle = "#008B8B"  
+ctx.fill()
+ctx.stroke()
 
-    return "#D3D3D3"  # 
-
-# 繪製掃描點並著色
-def scan_and_draw():
-    step = 1  # 減小步長提升細膩程度
-    for y in range(0, canvas.height, step):
-        for x in range(0, canvas.width, step):
-            color = get_region_color(x, y)
-            if color:
-                ctx.fillStyle = color
-                ctx.fillRect(x, y, step, step)  # 使用細小矩形填充
-
-# 開始掃描和著色
-scan_and_draw()
-</pre>
-<!-- 引入 Brython 程式庫 -->
-<p>
-<script src="/static/brython.js"></script>
-<script src="/static/brython_stdlib.js"></script>
-</p>
-<!-- 啟動 Brython -->
-<p>
-<script>
-window.onload = function() {
-    brython({debug:1, pythonpath:['/static/', '../../downloads/py/']});
-}
-</script>
-</p>
-<!-- 設置容器 -->
-<div id="brython div1"></div>
+ctx.beginPath()
+ctx.moveTo(160, 160)
+ctx.lineTo(160, 360)
+ctx.lineTo(360, 360)
+ctx.fillStyle = "#006400" 
+ctx.fill()
+ctx.stroke()</pre>
+</div>
 <!-- 利用 Brython 繪圖 -->
 <p>
 <script type="text/python">
@@ -376,24 +328,23 @@ canvas = html.CANVAS(width=600, height=600)
 brython_div = doc["brython div1"]
 brython_div <= canvas
 
-
 ctx = canvas.getContext("2d")
 ctx.lineWidth = 1
-
+ 
 # 畫兩個矩形 (紅色邊框)
 ctx.strokeStyle = 'red'
 ctx.beginPath()
 ctx.rect(100, 100, 200, 200)
 ctx.rect(200, 200, 200, 200)
 ctx.stroke()
-
+ 
 # 畫對角線 (藍色)
 ctx.strokeStyle = 'blue'
 ctx.beginPath()
 ctx.moveTo(100, 100)
 ctx.lineTo(300, 300)
 ctx.stroke()
-
+ 
 # 畫兩個圓形 (黑色)
 ctx.strokeStyle = 'black'
 ctx.beginPath()
@@ -402,81 +353,8 @@ ctx.stroke()
 ctx.beginPath()
 ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
 ctx.stroke()
-
-
-# 儲存幾何參數
-shapes = {
-    "circle1": (200, 200, 141.4),
-    "circle2": (300, 300, 141.4),
-    "square1": (100, 100, 300, 300),
-    "square2": (200, 200, 400, 400),
-}
-
-# 簡化的判定函式
-def is_in_circle(x, y, cx, cy, r):
-    return (x - cx) ** 2 + (y - cy) ** 2 < r ** 2
-
-def is_in_square(x, y, x1, y1, x2, y2):
-    return x1 <= x <= x2 and y1 <= y <= y2
-
-# 根據點判定區域並返回顏色
-def get_region_color(x, y):
-    c1 = is_in_circle(x, y, *shapes["circle1"])
-    c2 = is_in_circle(x, y, *shapes["circle2"])
-    s1 = is_in_square(x, y, *shapes["square1"])
-    s2 = is_in_square(x, y, *shapes["square2"])
-
-    # 不在任何圓內
-    if not c1 and not c2:
-        return None
-
-    # 同時在兩個圓內
-    if c1 and c2:
-        return "#FFE153"  
-
-    # 第一個圓的判定
-    if c1:
-        if s1:
-            return "#4A4AFF" if y < x else "#96FED1" 
-        if y < shapes["square1"][1]:
-            return "#1AFD9C"  
-        if y > shapes["square1"][3]:
-            return "#FF0000"  
-        if x < shapes["square1"][0]:
-            return "#A5A552"  
-        if x > shapes["square1"][2]:
-            return "#AD5A5A"  
-
-    # 第二個圓的判定
-    if c2:
-        if s2:
-            return "#D3A4FF"  
-        if y < shapes["square2"][1]:
-            return "#930093"  
-        if y > shapes["square2"][3]:
-            return "#FF359A"  
-        if x < shapes["square2"][0]:
-            return "#8600FF"  
-        if x > shapes["square2"][2]:
-            return "#5B4B00"  
-
-    return "#D3D3D3"  # 
-
-# 繪製掃描點並著色
-def scan_and_draw():
-    step = 1  # 減小步長提升細膩程度
-    for y in range(0, canvas.height, step):
-        for x in range(0, canvas.width, step):
-            color = get_region_color(x, y)
-            if color:
-                ctx.fillStyle = color
-                ctx.fillRect(x, y, step, step)  # 使用細小矩形填充
-
-# 開始掃描和著色
-scan_and_draw()
 </script>
-</p>
-<h3>w14_ex</h3>
+</p><h3>w14_ex</h3>
 <p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/131c3752c3cd25bb85f9d8788b6c9b4b/raw/26c0d9ff8f418d8f3c42cc5be8a1da6b3e84ce69/w14_ex">畫三個圓加顏色並且每次出來的顏色不一樣</a>)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
@@ -632,23 +510,133 @@ total = add_avoid_8(1, 100)
 # 印出計算結果
 print(total)  # 輸出避開 "8" 的總和結果</pre>
 <p>練習:"<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/cbf6d755ae7b0aa58429649e917c8602/raw/0cf8025700a9a9933ffff3f5317e15241f39c3ee/%25E7%25B7%25B4%25E7%25BF%2592.py">add_avoid_3_and_8</a>"</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 定義函式，計算不包含數字 "3" 和 "8" 的數字總和
-def add_avoid_3_and_8(start, end):
-    total = 0
-    for num in range(start, end + 1):
-        if '3' not in str(num) and '8' not in str(num):  # 檢查數字是否包含 "3" 或 "8"
-            total += num
-    return total
-
-# 呼叫函式，計算範圍內的總和
-start = 1
-end = 100
-total = add_avoid_3_and_8(start, end)
-
-# 印出計算結果
-print(f"從 {start} 到 {end} 的數字總和（排除包含 '3' 和 '8' 的數字）為：{total}")
-</pre>
 <p></p>
+<p>Canvas Example with Brython</p>
+<!-- 引入 Brython 的庫 -->
+<script src="https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/6751466ba419b17088b27b4f9bbec2f9985a1cb5/hw2.py" type="text/javascript">
+canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="brython()">
+    <div id="brython_div1"></div>
+
+    <!-- 這裡插入你的 Python 代碼 -->
+    <script type="text/python">
+        from browser import html
+        from browser import document as doc
+        import math
+
+        # 設置畫布
+        canvas = html.CANVAS(width=500, height=500)
+        brython_div = doc["brython_div1"]
+        brython_div <= canvas
+
+        ctx = canvas.getContext("2d")
+        ctx.lineWidth = 3
+
+        # 畫對角線 (藍色)
+        ctx.strokeStyle = 'blue'
+        ctx.beginPath()
+        ctx.moveTo(60, 60)
+        ctx.lineTo(260, 260)
+        ctx.stroke()
+
+        # 設置混色模式為 "screen"
+        ctx.globalCompositeOperation = "screen"
+
+        # 畫第一個圓，分成四個扇形區域
+        ctx.strokeStyle = 'black'
+        # 第一個圓的四個區域
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 0.25 * math.pi, 0.75 * math.pi)
+        ctx.fillStyle = "#2E8B57" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 0.75 * math.pi, 1.25 * math.pi)
+        ctx.fillStyle = "#C0392B"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 1.25 * math.pi, 1.75 * math.pi)
+        ctx.fillStyle = "#006400"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 1.75 * math.pi, 0.25 * math.pi)
+        ctx.fillStyle = "#F75000"  
+        ctx.fill()
+        ctx.stroke()
+
+        # 畫第二個圓，分成四個扇形區域
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 1.25 * math.pi, 1.75 * math.pi)
+        ctx.fillStyle = "#4B0082"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 1.75 * math.pi, 0.25 * math.pi)
+        ctx.fillStyle = "#556B2F" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 0.25 * math.pi, 0.75 * math.pi)
+        ctx.fillStyle = "#FF8C00"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 0.75 * math.pi, 1.25 * math.pi)
+        ctx.fillStyle = "#8B008B"  
+        ctx.fill()
+        ctx.stroke()
+
+        # 畫紅色矩形，分成四個三角形
+        ctx.strokeStyle = 'red'
+        ctx.beginPath()
+        ctx.moveTo(60, 60)
+        ctx.lineTo(60, 260)
+        ctx.lineTo(260, 260)
+        ctx.fillStyle = "#B8860B" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(60, 60)
+        ctx.lineTo(260, 60)
+        ctx.lineTo(260, 260)
+        ctx.fillStyle = "#3E1C41" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(160, 160)
+        ctx.lineTo(360, 160)
+        ctx.lineTo(360, 360)
+        ctx.fillStyle = "#008B8B"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(160, 160)
+        ctx.lineTo(160, 360)
+        ctx.lineTo(360, 360)
+        ctx.fillStyle = "#006400" 
+        ctx.fill()
+        ctx.stroke()
+
+        # 扫描和绘制函数定义
+        def scan_and_draw():
+            print("Scanning and drawing...")
+            # 可以加入掃描及繪圖邏輯
+</script>
 <h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
@@ -768,6 +756,7 @@ draw_shapes()
 <p></p>
 <p></p>
 <p><canvas height="300" id="my_canvas" width="500"></canvas></p>
+<p>
 <script type="application/javascript">
 // 初始化 HTML，確保 canvas 元素存在
         function setupCanvas() {
@@ -873,7 +862,9 @@ draw_shapes()
             drawShapes(ctx);
         }
 </script>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p><h1>HW 3</h1>
+</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/7DWcm6T6wSE" width="560"></iframe></p>
+<h1>HW 3</h1>
 <h4>主題: Python 的數字、演算法與迴圈 (20%)</h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 4 and Part 5</p>
 <p>完成上述流程整理後, 請將 HW3 自評分數輸入 cp2024 自評表單中.</p>
@@ -1024,7 +1015,8 @@ for start, end in maze_lines:
 ctx.stroke()
 </script>
 </p>
-<p><br/><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/Vidz63XrnDo" width="560"></iframe>    </p><h1>HW 4</h1>
+<p><br/><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/Vidz63XrnDo" width="560"></iframe>    </p>
+<h1>HW 4</h1>
 <h4>主題: 利用 Python 控制機電模擬系統 (20%)</h4>
 <p style="padding-left: 30px;">利用 <a href="https://solvespace.com/">https://solvespace.com/</a> 建立機械系統零組件</p>
 <p style="padding-left: 30px;">利用 <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> 建立機電模擬系統</p>
@@ -1041,13 +1033,13 @@ ctx.stroke()
 <p></p>
 <h3>w16_exam3</h3>
 <p><span>利用紅色連續線段標示從上方入口, 走至下方出口的路線圖</span></p>
-<p><span><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/892454c43bb6ff70b924336fe4a25fdc/raw/330f60b2c8586171409f961d86b407e6c918d3e9/w16_exam3.py">迷宮路徑解答</a></span></p>
+<p><span><a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/892454c43bb6ff70b924336fe4a25fdc/raw/b66d9befa959fd5d37ed377527e17ebbfddbff83/w16_exam3.py">迷宮路徑解答</a></span></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
 
 
 # 設定迷宮畫布大小
-canvas = html.CANVAS(width=600, height=600)
+canvas = html.CANVAS(width=300, height=300)
 brython_div = doc["brython_div1"]
 brython_div &lt;= canvas
 
@@ -1130,17 +1122,22 @@ for i in range(len(path_solution) - 1):
 ctx.stroke()</pre>
 <p></p>
 <!-- 引入 Brython 程式庫 -->
+<p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
+</p>
 <!-- 啟動 Brython -->
+<p>
 <script>
 window.onload = function() {
     brython({debug:1, pythonpath:['/static/', '../../downloads/py/']});
 }
 </script>
+</p>
 <!-- 設置容器 -->
 <div id="brython div1"></div>
 <!-- 利用 Brython 繪圖 -->
+<p>
 <script type="text/python">
 from browser import html
 from browser import document as doc
@@ -1229,7 +1226,10 @@ for i in range(len(path_solution) - 1):
     end = path_solution[i + 1]
     draw_line(start, end)
 ctx.stroke()
-</script><h1>Final Report</h1>
+</script>
+</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/vHxk0_PAmtI" width="560"></iframe></p>
+<h1>Final Report</h1>
 <p>期末口頭與書面專題報告 (20%)</p>
 <p>期末口頭專題報告影片:</p>
 <p style="padding-left: 30px;">......</p>
