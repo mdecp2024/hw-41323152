@@ -155,7 +155,10 @@ draw_hollow_circle(5, 5, 3)  # 3格半徑
     print(f"{i}. 我很棒")</pre>
 <p>心得:我已了解pythoh最基礎的for與print迴圈，雖然這很簡單，但這在python是最常用的指令。</p>
 <p></p>
-<h3>w13_hw</h3>
+<p></p>
+<p>筆記:</p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/2b847a5252a2f478df563f6ce69f794f87092179/1.py">題目一</a>)</p>
+<p></p><h3>w13_hw</h3>
 <p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/dad0a05c2e9dc9930aa7523fb603dd02eb257804/hw1.py">劃出一條直線和兩個正方形以及外接圓</a>)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
@@ -354,7 +357,127 @@ ctx.beginPath()
 ctx.arc(300, 300, 141.4, 0, 2 * 3.14)
 ctx.stroke()
 </script>
-</p><h3>w14_ex</h3>
+</p>
+<p></p>
+<!-- 引入 Brython 程式庫 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 設置容器 -->
+<div id="brython_div1"></div>
+<!-- 利用 Brython 繪圖 -->
+<script type="text/python">
+        from browser import html
+        from browser import document as doc
+        import math
+
+        # 設置畫布
+        canvas = html.CANVAS(width=500, height=500)
+        brython_div = doc["brython_div1"]
+        brython_div <= canvas
+
+        ctx = canvas.getContext("2d")
+        ctx.lineWidth = 3
+
+        # 畫對角線 (藍色)
+        ctx.strokeStyle = 'blue'
+        ctx.beginPath()
+        ctx.moveTo(60, 60)
+        ctx.lineTo(260, 260)
+        ctx.stroke()
+
+        # 設置混色模式為 "screen"
+        ctx.globalCompositeOperation = "screen"
+
+        # 畫第一個圓，分成四個扇形區域
+        ctx.strokeStyle = 'black'
+        # 第一個圓的四個區域
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 0.25 * math.pi, 0.75 * math.pi)
+        ctx.fillStyle = "#2E8B57" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 0.75 * math.pi, 1.25 * math.pi)
+        ctx.fillStyle = "#C0392B"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 1.25 * math.pi, 1.75 * math.pi)
+        ctx.fillStyle = "#006400"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(160, 160, 141, 1.75 * math.pi, 0.25 * math.pi)
+        ctx.fillStyle = "#F75000"  
+        ctx.fill()
+        ctx.stroke()
+
+        # 畫第二個圓，分成四個扇形區域
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 1.25 * math.pi, 1.75 * math.pi)
+        ctx.fillStyle = "#4B0082"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 1.75 * math.pi, 0.25 * math.pi)
+        ctx.fillStyle = "#556B2F" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 0.25 * math.pi, 0.75 * math.pi)
+        ctx.fillStyle = "#FF8C00"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(260, 260, 141, 0.75 * math.pi, 1.25 * math.pi)
+        ctx.fillStyle = "#8B008B"  
+        ctx.fill()
+        ctx.stroke()
+
+        # 畫紅色矩形，分成四個三角形
+        ctx.strokeStyle = 'red'
+        ctx.beginPath()
+        ctx.moveTo(60, 60)
+        ctx.lineTo(60, 260)
+        ctx.lineTo(260, 260)
+        ctx.fillStyle = "#B8860B" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(60, 60)
+        ctx.lineTo(260, 60)
+        ctx.lineTo(260, 260)
+        ctx.fillStyle = "#3E1C41" 
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(160, 160)
+        ctx.lineTo(360, 160)
+        ctx.lineTo(360, 360)
+        ctx.fillStyle = "#008B8B"  
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(160, 160)
+        ctx.lineTo(160, 360)
+        ctx.lineTo(360, 360)
+        ctx.fillStyle = "#006400" 
+        ctx.fill()
+        ctx.stroke()
+
+        # 開始掃描和著色
+        scan_and_draw()
+    
+</script><h3>w14_ex</h3>
 <p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/131c3752c3cd25bb85f9d8788b6c9b4b/raw/26c0d9ff8f418d8f3c42cc5be8a1da6b3e84ce69/w14_ex">畫三個圓加顏色並且每次出來的顏色不一樣</a>)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
