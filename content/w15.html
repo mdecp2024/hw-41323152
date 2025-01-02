@@ -189,8 +189,24 @@ total = add_avoid_8(1, 100)
 # 印出計算結果
 print(total)  # 輸出避開 "8" 的總和結果</pre>
 <p>練習:"<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/cbf6d755ae7b0aa58429649e917c8602/raw/0cf8025700a9a9933ffff3f5317e15241f39c3ee/%25E7%25B7%25B4%25E7%25BF%2592.py">add_avoid_3_and_8</a>"</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 定義函式，計算不包含數字 "3" 和 "8" 的數字總和
+def add_avoid_3_and_8(start, end):
+    total = 0
+    for num in range(start, end + 1):
+        if '3' not in str(num) and '8' not in str(num):  # 檢查數字是否包含 "3" 或 "8"
+            total += num
+    return total
+
+# 呼叫函式，計算範圍內的總和
+start = 1
+end = 100
+total = add_avoid_3_and_8(start, end)
+
+# 印出計算結果
+print(f"從 {start} 到 {end} 的數字總和（排除包含 '3' 和 '8' 的數字）為：{total}")
+</pre>
 <p></p>
-<p>Canvas Example with Brython</p>
+<p></p>
 <!-- 引入 Brython 的庫 -->
 <script src="https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/6751466ba419b17088b27b4f9bbec2f9985a1cb5/hw2.py" type="text/javascript">
 canvas {
@@ -315,8 +331,7 @@ canvas {
         def scan_and_draw():
             print("Scanning and drawing...")
             # 可以加入掃描及繪圖邏輯
-</script>
-<br />w14_ex << <a href='w14_ex.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
+</script><br />w14_ex << <a href='w14_ex.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
         
     <!-- footer -->
       <div class="container">

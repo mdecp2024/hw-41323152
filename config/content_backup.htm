@@ -158,6 +158,202 @@ draw_hollow_circle(5, 5, 3)  # 3格半徑
 <p></p>
 <p>筆記:</p>
 <p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/2b847a5252a2f478df563f6ce69f794f87092179/1.py">題目一</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">"this is a string"
+'everything you write in between quotes is a string'
+help("input")
+input("What's your name?")
+input("Where are you from?")
+print (" /\_/\   ")
+print (" &gt;^.^&lt;   ")
+print ("  / \    ")
+print (" (___)___")
+help("print")</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/4cb814e56589cbdc40bec24630ec198aa52be97b/2.py">題目二</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">first_name = "Fernando"
+last_name  = "Pérez"
+print (first_name)
+print (last_name)
+name = input("What's your name?")
+favorite_food = input ("What is your favorite food?")
+print ("Hi! My name is " + name)
+print ("My favorite food is " + favorite_food) 
+print (name + "'s favorite food is " + favorite_food)</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/0e2754976f00347dcdd8fa10963a3bbf724dd02b/3.py">題目三</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">programming_books = ["Learn python", "Python for all",  "Intro to python"]
+print (programming_books)
+wanted_book = input("Hi! What book would you like to buy?")
+print (wanted_book)
+if wanted_book in programming_books:
+    print ("Yes, we sell it!")
+else:
+    print ("Sorry, we don't sell that book")</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/13284ffbf793e357c1eca166b2a82e229e8e54b5/4.py">題目四</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">shopping_list = ["carrots", "chocolate", "olives"]
+print (shopping_list)
+new_item = input("What else do I have to buy?")
+ 
+if new_item in shopping_list:
+    print (new_item + " is/are already in the shopping list")
+    print (shopping_list) 
+else:
+    shopping_list.append(new_item)
+    print (shopping_list)
+     
+item_to_remove = input("What do I have to remove?")
+ 
+if item_to_remove in shopping_list:
+    shopping_list.remove(item_to_remove)
+    print (shopping_list)
+else:
+    print (item_to_remove + " is/are not in the list")
+    print (shopping_list)</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/45a09096181e33e0cbfa3c59f58c04025939838c/5.py">題目五</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">todays_menu = ["burger", "salad", "coke"]
+print(todays_menu)
+side_dish_index = todays_menu.index("salad")
+print(side_dish_index)
+todays_menu.pop(side_dish_index)
+print(todays_menu)
+todays_menu.insert(side_dish_index, "fries")  # 修正變數名稱
+print(todays_menu)</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/06392949440dca9e98dd1873ee3f7a04e334b5c5/6.py">題目六</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">cities = ["San Diego", "Prague", "Cape Town", "Tokyo", "Melbourne"]
+print(cities)
+print(cities[1])
+print(cities[1:4])
+print(cities[1:4:2])
+print(cities[0:3])
+print(cities[:3])
+print(cities[2:5])
+print(cities[2:])
+print(cities[0:5:2])
+print(cities[4])
+print(cities[-1])
+print(cities[-4:-1])
+print(cities[3:0:-1])
+print(cities[-2:-5:-1])
+print(cities[::-1])</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/f97e19584a838daf9acfe01b365894f12459e3b4/7.py">題目七</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">senses = ["eyes", "nose", "ears", "tongue", "skin"]
+print (senses)
+senses[1] = "smell"
+print (senses)
+senses[3:5] = ["taste", "touch"]
+print (senses)
+senses[0:3:2] = ["sight", "hearing"]
+print (senses)
+planets = ["Mercury", "Mars", "Earth", "Neptune"]
+print (planets)
+planets = planets + ["Jupiter"]
+print (planets)
+planets = planets[0:2] + ["Venus"] + planets[2:5]
+print (planets)
+planets = planets[:5] + ["Uranus", "Saturn"] + planets[5:]
+print(planets)
+house = ["kitchen", "dining room", "living room", "bedroom", "bathoom", "garden", "balcony", "terrace"]
+print (house)
+del house[1]
+print (house)
+del house[4:6]
+print (house)
+del house[::2]
+print (house)
+del house</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/95620d5fce29c836a4b26b6dd265be725bd46acf/8.py">題目八</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">friends = ["Geetha", "Luca", "Daisy", "Juhan"]
+dishes  = ["sushi", "burgers", "tacos", "pizza"]
+print ("My friends' names are:")
+print (friends)
+for index in range (0,4):
+    print ("index:  " + str(index))
+    print ("friend: " + friends[index])
+print ("Their favorite dishes are:")
+print (dishes)
+for index in range (0,4):
+    print ("index:  " + str(index))
+    print ("dish: " + dishes[index])
+for index in range (0,4):
+    print ("My friend " + friends[index] + "'s favorite dish is " + dishes[index])</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/bd1f609e3266ace155fcfb443587d4472ed8c838/9.py">題目九</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">animals = ["giraffe", "penguin", "dolphin"]
+print (animals)
+# for each position in the list
+for i in range (0, len(animals)):
+    print ("-- Beginning of loop --")
+    # print each element and its position
+    print ("The element in position " + str(i) + " is " + animals[i])
+wanted_to_see = "penguin"
+# for each position in the list
+for i in range (0, len(animals)):
+    # if the current animal is what you really wanted to see
+    if animals[i] == wanted_to_see:
+        # print out that that's the animal you really wanted to see
+        print ("I saw a " + animals[i] + " and I really wanted to see it!")
+    # if the current animal is not what you really wanted to see
+    else:
+        # just print out that you saw it
+        print ("I saw a " + animals[i])</pre>
+<p></p>
+<p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6227fdf720f711d830dd780682f73ff7/raw/8bb2c7780f338183874f8284bc626fdfe08e62f2/10.py">題目十</a>)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">accessories = ["belt", "hat", "gloves", "sunglasses", "ring"]
+print (accessories)
+# for each position in the list
+for i in range (len(accessories)):
+    #print each elements and its position
+    print ("The element "  + accessories[i] + " is in position " + str(i))
+# for each position in the list
+for i in range (len(accessories)):
+    # if the length of the element equals 6
+    if len(accessories[i]) == 6:
+        # print the element, its position, and its number of characters
+        print ("The element " + accessories[i] + " is in position " + str(i) + " and it has 6 characters")
+# for each position in the list
+for i in range (len(accessories)):
+    # if the length of the element is less than 6
+    if len(accessories[i]) &lt; 6:
+        # print the element, its position, and its number of characters
+        print ("The element " + accessories[i] + " is in position " + str(i) + " and it has less than 6 characters")  
+# defining the threshold
+n_of_characters = 6
+# for each position in the list 
+for i in range (len(accessories)):
+    # if the length of the element is greater than the threshold
+    if len(accessories[i]) &gt; n_of_characters:
+        # print the element, its position, and its number of characters
+        print ("The element " + accessories[i] + " is in position " + str(i) + " and it has more than " + str(n_of_characters) + " characters")
+# defining the threshold
+n_of_characters = 6
+# for each position in the list 
+for i in range (len(accessories)):
+    # if the length of the element is not equal to the threshold
+    if len(accessories[i]) != n_of_characters:
+        # print the element, its position, and its number of characters
+        print ("The element " + accessories[i] + " is in position " + str(i) + " and it has a number of characters different from " + str(n_of_characters))
+# defining the threshold
+position = 2
+# for each position in the list 
+for i in range (len(accessories)):
+    # if the position of the element is less then or equal to to the threshold
+    if i &lt;= position:
+        # print the element, its position, and its position characteristic
+        print ("The element " + accessories[i] + " is in position " + str(i) + ", which is less than or equal to " + str(position))
+# defining the threshold
+position = 2
+# for each position in the list 
+for i in range (len(accessories)):
+    # if the position of the element is greater then or equal to to the threshold
+    if i &gt;= position:
+        # print the element, its position, and its position characteristic
+        print ("The element " + accessories[i] + " is in position " + str(i) + ", which is at least " + str(position))
+</pre>
 <p></p><h3>w13_hw</h3>
 <p>(<a href="https://mdecp2024.github.io/hw-41323152/content/Brython.html?src=https://gist.githubusercontent.com/41323152/6ad6c5f65bec710ae68562eda7f2801b/raw/dad0a05c2e9dc9930aa7523fb603dd02eb257804/hw1.py">劃出一條直線和兩個正方形以及外接圓</a>)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
